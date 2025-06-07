@@ -31,3 +31,28 @@ def chooseInitialPlayer():
         return 'Player'
     if ran == 1:
         return 'Computer'
+
+
+
+def isAFreeSpace(l,n):
+    if n >=len(l):
+        return False
+    if l[n] == ' ':
+        return True
+    else:
+        return False
+
+
+def fullBoard(l):
+    i = 0
+    while i < len(l):
+        if l[i] == ' ':
+            return False
+        i = i + 1
+    return True
+
+
+def applyPlay(jug,l,lletra,n):
+        print(jug,'occupies position',n)  
+        l[n] = lletra
+        return l
