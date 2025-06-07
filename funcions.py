@@ -21,3 +21,13 @@ def drawBoard(l,n):
         print(' ' + l[0] + ' '+ '|' + ' ' + l[1]+' ' + '|'+ ' '+ l[2]+' ')
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
         print('='*12)
+
+
+
+def chooseInitialPlayer():
+    import random
+    ran = random.randint(0,1)
+    if ran == 0:
+        return 'Player'
+    if ran == 1:
+        return 'Computer'
