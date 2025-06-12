@@ -56,3 +56,42 @@ def applyPlay(jug,l,lletra,n):
         print(jug,'occupies position',n)  
         l[n] = lletra
         return l
+
+
+def isAWonPlay(l,lletra):
+        if l[0] == lletra:
+            if l[1] and l[2] == lletra:
+                return True
+            if l[3] and l[6] == lletra:
+                return True
+            if l[4] and l[8] == lletra:
+                return True
+        if l[1] == lletra:
+            if l[4] and l[7] == lletra:
+                return True
+        if l[2] == lletra:
+            if l[5] and l[8] == lletra:
+                return True
+            if l[4] and l[6] == lletra:
+                return True
+        if l[3] == lletra:
+            if l[4] and l[5] == lletra:
+                return True
+        if [6] == lletra:
+            if l[7] and l[8] == lletra:
+                return True
+        else: 
+            return False
+
+
+import random
+def randomPlay(l):
+    c = 0
+    b = []
+    for element in l:
+        if element == " ":
+            b = b + [c]
+        c = c + 1
+    if len(b) == 0:
+        return "-1"
+    return random.choice(b)
