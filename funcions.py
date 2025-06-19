@@ -95,3 +95,11 @@ def randomPlay(l):
     if len(b) == 0:
         return "-1"
     return random.choice(b)
+
+
+def play(l):
+    resposta = input("Choose position to play (0-8): ")
+    while not(resposta >= "0" and resposta <= "8") or not(isAFreeSpace(l,int(resposta))):
+        print("We are sorry. This position is not valid.")
+        resposta = input("Choose position to play (0-8): ")
+    return int(resposta)
