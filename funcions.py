@@ -1,14 +1,9 @@
- def startBoard():
+def startBoard():
     taulell = [' ',' ',' ',' ',' ',' ',' ',' ',' ',]
     return taulell
 
 
 def drawBoard(l,n):
- '''
- Dibuixa el taulell l
- l: llista del taulell
- n: número
- '''
     if len(l) != 9:
         print('Error! Board badly designed!')
     else:
@@ -111,17 +106,17 @@ def play(l):
 
 def chooseLetterPlayer():
  resposta = input("Choose between X or O: ")
-    while resposta != "X" and resposta != "O":
-        print("We are sorry. This letter is not valid.")
-        resposta = input("Choose between X or O: ")
-    if resposta == "X":
+ while resposta != "X" and resposta != "O":
+     print("We are sorry. This letter is not valid.")
+     resposta = input("Choose between X or O: ")
+     if resposta == "X":
         return ['X', 'O']
-    if resposta == "O":
+     if resposta == "O":
         return ['O', 'X']
 
 
 
-  def playAgain():
+def playAgain():
     resposta = input("Do you want to play another game? (y / n) ")
     while resposta != "y" and resposta != "Y" and resposta != "n" and resposta != "N":
         print("We are sorry. This option is not valid.")
@@ -133,14 +128,31 @@ def chooseLetterPlayer():
 
 
 def game():
-    print (startBoard())
-    print (chooseLetterPlayer())
-    print(chooseInitialPlayer())
     jug = chooseInitialPlayer()
     estatTaulell = startBoard()
     lletra = chooseLetterPlayer()
-    pos = play(estatTaulell)
-    estatTaulell = applyPlay(jug,estatTaulell,lletra,pos)
-    while not fullBoard() and not isAWonPlay(l,lletra):
+    print("Starts "+ jug)
+    torn = 0
+    pos = 0
+    
+    while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra):
+        drawBoard(estatTaulell,torn)
+        torn = torn + 1
+        if jug =="Player":
+            pos = play(estatTaulell)
+            estatTaulell = applyPlay(jug,estatTaulell,lletra[0],pos)
+        else:
+            jug="Player"
+            
+       #  print(estatTaulell())
+        # if chooseInitialPlayer() = "Player":
+            
+        
+        
+        
+        
+        
+        
+        
         
 game()
