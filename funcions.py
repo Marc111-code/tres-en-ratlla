@@ -1,5 +1,5 @@
 def startBoard():
-    taulell = [' ',' ',' ',' ',' ',' ',' ',' ',' ',]
+    taulell = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
     return taulell
 
 
@@ -106,7 +106,7 @@ def play(l):
 
 def chooseLetterPlayer():
  resposta = input("Choose between X or O: ")
- while resposta != "X" and resposta != "O":
+ while resposta != "X" or resposta != "O":
      print("We are sorry. This letter is not valid.")
      resposta = input("Choose between X or O: ")
      if resposta == "X":
@@ -134,23 +134,26 @@ def game():
     print("Starts "+ jug)
     torn = 0
     pos = 0
-    
-    while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra):
+    while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra[0]) and  not isAWonPlay (estatTaulell,lletra[1]):
+        print(fullBoard(estatTaulell))
+        print(isAWonPlay (estatTaulell,lletra))
+        
         drawBoard(estatTaulell,torn)
-        if isAWonPlay(estatTaulell, lletra):
-            if jug == "Player":
-                print("Molt Bé, Has Guanyat!")
-            else:
-                print("L'Ordinador ha guanyat!")
-            playAgain()
+        
         torn = torn + 1
         if jug == "Player":
             pos = play(estatTaulell)
             estatTaulell = applyPlay(jug, estatTaulell, lletra[0], pos)
             jug = "Computer"
         else:
-            estatTaulell = randomPlay(estatTaulell)
+            pos = randomPlay(estatTaulell)
+            estatTaulell = applyPlay(jug, estatTaulell, lletra[1], pos)
+            
             jug = "Player"
-    print("Empat! El tauler està ple i ningú ha guanyat.")
+    if isAWonPlay(estatTaulell, lletra[1]):
+        print("Molt Bé, Has Guanyat!")
+    elif isAWonPlay(estatTaulell, lletra[0]):
+        print("L'Ordinador ha guanyat!")
+    else:
+        print("Empat! El tauler està ple i ningú ha guanyat.")
     playAgain()
-game()
