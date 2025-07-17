@@ -10,15 +10,15 @@ def drawBoard(l,n):
         print("Turn number:", n)
         print('='*12)
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[6] + ' '+ '|' + ' ' + l[7]+' ' + '|'+ ' '+ l[8]+' ')
+        print(' ' + l[2] + ' '+ '|' + ' ' + l[1]+' ' + '|'+ ' '+ l[0]+' ')
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
         print('-'*12)
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[3] + ' '+ '|' + ' ' + l[4]+' ' + '|'+ ' '+ l[5]+' ')
+        print(' ' + l[5] + ' '+ '|' + ' ' + l[4]+' ' + '|'+ ' '+ l[3]+' ')
         print(' '*3 + '|'+' '*3 + '|'+' '*3)   
         print('-'*12)
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[0] + ' '+ '|' + ' ' + l[1]+' ' + '|'+ ' '+ l[2]+' ')
+        print(' ' + l[8] + ' '+ '|' + ' ' + l[7]+' ' + '|'+ ' '+ l[6]+' ')
         print(' '*3 + '|'+' '*3 + '|'+' '*3)  
         print('='*12)
 
@@ -57,8 +57,17 @@ def applyPlay(jug,l,lletra,n):
         l[n] = lletra
         return l
 
-
-def isAWonPlay(l,lletra):
+def isAWonPlay(l, lletra):
+    winning_combinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],  
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],  
+        [0, 4, 8], [2, 4, 6]              
+    ]
+    for combo in winning_combinations:
+        if all(l[i] == lletra for i in combo):
+            return True
+    return False
+'''def isAWonPlay(l,lletra):
         if l[0] == lletra:
             if l[1] and l[2] == lletra:
                 return True
@@ -77,13 +86,13 @@ def isAWonPlay(l,lletra):
         if l[3] == lletra:
             if l[4] and l[5] == lletra:
                 return True
-        if [6] == lletra:
+        if l[6] == lletra:
             if l[7] and l[8] == lletra:
                 return True
         else: 
             return False
 
-
+'''
 import random
 def randomPlay(l):
     c = 0
@@ -135,9 +144,6 @@ def game():
     torn = 0
     pos = 0
     while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra[0]) and  not isAWonPlay (estatTaulell,lletra[1]):
-        print(fullBoard(estatTaulell))
-        print(isAWonPlay (estatTaulell,lletra))
-        
         drawBoard(estatTaulell,torn)
         
         torn = torn + 1
@@ -150,10 +156,13 @@ def game():
             estatTaulell = applyPlay(jug, estatTaulell, lletra[1], pos)
             
             jug = "Player"
-    if isAWonPlay(estatTaulell, lletra[1]):
+    if isAWonPlay(estatTaulell, lletra[0]):
         print("Molt Bé, Has Guanyat!")
-    elif isAWonPlay(estatTaulell, lletra[0]):
+        playAgain()
+    elif isAWonPlay(estatTaulell, lletra[1]):
         print("L'Ordinador ha guanyat!")
+        playAgain()
     else:
         print("Empat! El tauler està ple i ningú ha guanyat.")
-    playAgain()
+        playAgain()
+game()
