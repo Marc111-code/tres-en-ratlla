@@ -7,19 +7,13 @@ def drawBoard(l,n):
     if len(l) != 9:
         print('Error! Board badly designed!')
     else:
-        print("Turn number:", n)
+        print("Número de torn", n)
         print('='*12)
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[2] + ' '+ '|' + ' ' + l[1]+' ' + '|'+ ' '+ l[0]+' ')
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)  
+        print(' ' + l[0] + ' '+ '|' + ' ' + l[1]+' ' + '|'+ ' '+ l[2]+' ')
         print('-'*12)
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[5] + ' '+ '|' + ' ' + l[4]+' ' + '|'+ ' '+ l[3]+' ')
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)   
+        print(' ' + l[3] + ' '+ '|' + ' ' + l[4]+' ' + '|'+ ' '+ l[5]+' ')
         print('-'*12)
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)  
-        print(' ' + l[8] + ' '+ '|' + ' ' + l[7]+' ' + '|'+ ' '+ l[6]+' ')
-        print(' '*3 + '|'+' '*3 + '|'+' '*3)  
+        print(' ' + l[6] + ' '+ '|' + ' ' + l[7]+' ' + '|'+ ' '+ l[8]+' ')
         print('='*12)
 
 
@@ -28,9 +22,9 @@ def chooseInitialPlayer():
     import random
     ran = random.randint(0,1)
     if ran == 0:
-        return 'Player'
+        return 'Jugador'
     if ran == 1:
-        return 'Computer'
+        return 'Ordinador'
 
 
 
@@ -53,7 +47,7 @@ def fullBoard(l):
 
 
 def applyPlay(jug,l,lletra,n):
-        print(jug,'occupies position',n)  
+        print(jug,'ocupa la posició',n)  
         l[n] = lletra
         return l
 
@@ -107,17 +101,17 @@ def randomPlay(l):
 
 
 def play(l):
-    resposta = input("Choose position to play (0-8): ")
+    resposta = input("Tria posició per jugar (0-8): ")
     while not(resposta >= "0" and resposta <= "8") or not(isAFreeSpace(l,int(resposta))):
-        print("We are sorry. This position is not valid.")
-        resposta = input("Choose position to play (0-8): ")
+        print("Ho sentim. Aquesta posició no és vàlida")
+        resposta = input("Tria posició per jugar (0-8): ")
     return int(resposta)
 
 def chooseLetterPlayer():
- resposta = input("Choose between X or O: ")
+ resposta = input("Tria entre X o O: ")
  while resposta != "X" or resposta != "O":
-     print("We are sorry. This letter is not valid.")
-     resposta = input("Choose between X or O: ")
+     print("Ho sentim. Aquesta lletra no està disponible.")
+     resposta = input("Tria entre X o O: ")
      if resposta == "X":
         return ['X', 'O']
      else:
@@ -126,10 +120,10 @@ def chooseLetterPlayer():
 
 
 def playAgain():
-    resposta = input("Do you want to play another game? (y / n) ")
-    while resposta != "y" and resposta != "Y" and resposta != "n" and resposta != "N":
-        print("We are sorry. This option is not valid.")
-        resposta = input("Do you want to play another game? (y / n) ")
+    resposta = input("Vols jugar una altre partida? (s / n) ")
+    while resposta != "s" and resposta != "S" and resposta != "n" and resposta != "N":
+        print("Ho sentim. Aquesta opció no és vàlida.")
+        resposta = input("Vols jugar una altre partida? (s / n) ")
     if resposta == "Y" or resposta == "y":
         return True
     if resposta == "n" or resposta == "N":
@@ -140,22 +134,22 @@ def game():
     jug = chooseInitialPlayer()
     estatTaulell = startBoard()
     lletra = chooseLetterPlayer()
-    print("Starts "+ jug)
+    print("Comença "+ jug)
     torn = 0
     pos = 0
     while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra[0]) and  not isAWonPlay (estatTaulell,lletra[1]):
         drawBoard(estatTaulell,torn)
         
         torn = torn + 1
-        if jug == "Player":
+        if jug == "Jugador":
             pos = play(estatTaulell)
             estatTaulell = applyPlay(jug, estatTaulell, lletra[0], pos)
-            jug = "Computer"
+            jug = "Ordinador"
         else:
             pos = randomPlay(estatTaulell)
             estatTaulell = applyPlay(jug, estatTaulell, lletra[1], pos)
             
-            jug = "Player"
+            jug = "Jugador"
     if isAWonPlay(estatTaulell, lletra[0]):
         print("Molt Bé, Has Guanyat!")
         playAgain()
