@@ -137,8 +137,20 @@ def posTauler():
     print('-'*12)
     print(' 6 | 7 | 8 ')
     print('='*12)
-
-
+def statistics(wg,lg, tg):
+    print ("Statistics")
+    print("- Number of games played:", wg + lg + tg)
+    print("- Number of games won:", wg)
+    print("- Number of games lost:", lg)
+    print("- Number of tied games:", tg)
+def menu():
+    print("Menu")
+    print("1. Play game")
+    print("2. History of games")
+    print("3. Exit")
+    print("                       ")
+    opcio = input("Choose option: ")
+    print(repr(opcio))
 
 def game():
     print("Hola")
