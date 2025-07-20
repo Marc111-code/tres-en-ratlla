@@ -124,13 +124,26 @@ def playAgain():
     while resposta != "s" and resposta != "S" and resposta != "n" and resposta != "N":
         print("Ho sentim. Aquesta opció no és vàlida.")
         resposta = input("Vols jugar una altre partida? (s / n) ")
-    if resposta == "Y" or resposta == "y":
+    if resposta == "S" or resposta == "s":
         return True
     if resposta == "n" or resposta == "N":
         return False  
+def posTauler():
+    print("Posicions del tauler:")
+    print('='*12)
+    print(' 0 | 1 | 2 ')
+    print('-'*12)
+    print(' 3 | 4 | 5 ')
+    print('-'*12)
+    print(' 6 | 7 | 8 ')
+    print('='*12)
+
 
 
 def game():
+    print("Hola")
+    print("Benvingut/ada al joc del Tres en Ratlla")
+    posTauler()
     jug = chooseInitialPlayer()
     estatTaulell = startBoard()
     lletra = chooseLetterPlayer()
@@ -139,7 +152,6 @@ def game():
     pos = 0
     while not fullBoard(estatTaulell) and not isAWonPlay (estatTaulell,lletra[0]) and  not isAWonPlay (estatTaulell,lletra[1]):
         drawBoard(estatTaulell,torn)
-        
         torn = torn + 1
         if jug == "Jugador":
             pos = play(estatTaulell)
@@ -152,11 +164,13 @@ def game():
             jug = "Jugador"
     if isAWonPlay(estatTaulell, lletra[0]):
         print("Molt Bé, Has Guanyat!")
-        playAgain()
     elif isAWonPlay(estatTaulell, lletra[1]):
         print("L'Ordinador ha guanyat!")
-        playAgain()
     else:
         print("Empat! El tauler està ple i ningú ha guanyat.")
-        playAgain()
+        
+    if playAgain():
+        game()
+    else:
+        print("Gràcies per jugar!")
 game()
